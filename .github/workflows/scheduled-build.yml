@@ -22,7 +22,6 @@ jobs:
       with:
         cache: 'pnpm'
     - run: corepack enable
-    - run: sudo apt-get -y purge libvips libvips-tools
     - run: ./work.sh
       env:
         LB_TOKEN: ${{ secrets.LB_TOKEN }}
