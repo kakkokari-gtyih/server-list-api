@@ -231,6 +231,15 @@ getInstancesInfos()
 
 		fs.writeFile('./dist/instances.json', JSON.stringify(INSTANCES_JSON), () => { })
 
+		//#region create 60 instances-separated json files
+		const INSTANCES_PER_FILE = 60;
+
+		for (let i = 0; i < alives.length; i += INSTANCES_PER_FILE) {
+			const instances = alives.slice(i, i + INSTANCES_PER_FILE)
+			fs.writeFile(`./dist/instances-infos/${i / INSTANCES_PER_FILE + 1}.json`, JSON.stringify(instances), () => { })
+		}
+		//#endregion
+
 		//#region remove dead/ignored servers' assets
 		try {
 			const targets = new Set();
