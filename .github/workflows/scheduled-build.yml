@@ -22,7 +22,8 @@ jobs:
       with:
         cache: 'pnpm'
     - run: corepack enable
-    - run: ./work.sh
+    - run: pnpm install
+    - run: pnpm exec node ./index.js
       env:
         LB_TOKEN: ${{ secrets.LB_TOKEN }}
     - name: Publish generated content to GitHub Pages
