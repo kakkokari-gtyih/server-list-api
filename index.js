@@ -233,6 +233,8 @@ getInstancesInfos()
 		fs.writeFileSync('./dist/instances.json', JSON.stringify(INSTANCES_JSON), () => { })
 
 		//#region create misskey-hub internal use json
+		// if folder not exists, create it
+		await mkdirp('./dist/_hub');
 		fs.writeFileSync('./dist/_hub/instances5.json', JSON.stringify(alives.slice(0, 5)), () => { })
 		//#endregion
 
