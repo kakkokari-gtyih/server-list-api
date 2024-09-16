@@ -232,25 +232,8 @@ getInstancesInfos()
 		glog('Writing instances.json...');
 		fs.writeFileSync('./dist/instances.json', JSON.stringify(INSTANCES_JSON), () => { })
 
-		//#region create 60 instances-separated json files
-		const INSTANCES_PER_FILE = 60;
-
-		const splittedInstancesInfosWritePromises = [];
-
-		for (let i = 0; i < alives.length; i += INSTANCES_PER_FILE) {
-			const instances = alives.slice(i, i + INSTANCES_PER_FILE)
-			splittedInstancesInfosWritePromises.push(new Promise((res, rej) => {
-				fsp.writeFile(`./dist/instances-infos/${i / INSTANCES_PER_FILE + 1}.json`, JSON.stringify(instances)).then(() => {
-					glog(`Wrote instances-infos/${i / INSTANCES_PER_FILE + 1}.json`);
-					res();
-				}).catch(e => {
-					rej(e);
-				});
-			}));
-		}
-
-		glog('Writing instances-infos/*.json...');
-		await Promise.allSettled(splittedInstancesInfosWritePromises);
+		//#region create misskey-hub internal use json
+		fs.writeFileSync('./dist/_hub/instances5.json', JSON.stringify(alives.slice(0, 5)), () => { })
 		//#endregion
 
 		//#region remove dead/ignored servers' assets
