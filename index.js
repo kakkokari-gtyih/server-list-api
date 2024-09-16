@@ -240,7 +240,7 @@ getInstancesInfos()
 		for (let i = 0; i < alives.length; i += INSTANCES_PER_FILE) {
 			const instances = alives.slice(i, i + INSTANCES_PER_FILE)
 			splittedInstancesInfosWritePromises.push(new Promise((res, rej) => {
-				fs.promises.writeFile(`./dist/instances-infos/${i / INSTANCES_PER_FILE + 1}.json`, JSON.stringify(instances)).then(() => {
+				fsp.writeFile(`./dist/instances-infos/${i / INSTANCES_PER_FILE + 1}.json`, JSON.stringify(instances)).then(() => {
 					glog(`Wrote instances-infos/${i / INSTANCES_PER_FILE + 1}.json`);
 					res();
 				}).catch(e => {
