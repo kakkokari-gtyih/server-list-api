@@ -46,6 +46,9 @@ jobs:
       env:
         LB_TOKEN: ${{ secrets.LB_TOKEN }}
 
+    - name: Create .nojekyll
+      run: touch ./dist/.nojekyll
+
     - name: Publish generated content to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
