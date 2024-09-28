@@ -11,4 +11,4 @@ jobs:
       contents: write
     steps:
     - name: Request to Cloudflare Pages Webhook
-      run: curl -If ${{ secrets.CF_PAGES_WEBHOOK }}
+      run: curl -X POST -f ${{ secrets.CF_PAGES_WEBHOOK }}
