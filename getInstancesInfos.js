@@ -387,7 +387,7 @@ export const getInstancesInfos = async function () {
 
 			function statsFallback() {
 				if (!nodeinfo.usage) return null;
-				if (nodeinfo.usage.localPosts == null && nodeinfo.usage.users?.total == null) return null;
+				if (nodeinfo.usage.localPosts == null || nodeinfo.usage.users?.total == null) return null;
 
 				glog(`Fetching stats for ${instance.url} failed. Fallback to nodeinfo.usage`);
 
