@@ -51,7 +51,7 @@ async function fetchJson(method, _url, json) {
 		body: (method !== 'GET') ? JSON.stringify(json ?? {}) : undefined,
 		headers: {
 			"Content-Type": "application/json",
-			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0"
+			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
 		},
 		redirect: "error"
 	};
@@ -385,8 +385,20 @@ export const getInstancesInfos = async function () {
 				return;
 			};
 
+			function statsFallback() {
+				if (!nodeinfo.usage) return null;
+				if (nodeinfo.usage.localPosts == null && nodeinfo.usage.users?.total == null) return null;
+
+				glog(`Fetching stats for ${instance.url} failed. Fallback to nodeinfo.usage`);
+
+				return {
+					originalNotesCount: nodeinfo.usage.localPosts,
+					originalUsersCount: nodeinfo.usage.users?.total,
+				};
+			}
+
 			const meta = (await fetchJson('POST', `https://${instance.url}/api/meta`)) || null;
-			const stats = (await fetchJson('POST', `https://${instance.url}/api/stats`)) || null;
+			const stats = (await fetchJson('POST', `https://${instance.url}/api/stats`)) || statsFallback();
 			const noteChart = (await fetchJson('GET', `https://${instance.url}/api/charts/notes`, { span: "day", limit: 15 })) || null;
 
 			if (nodeinfo && meta && stats && noteChart) {
