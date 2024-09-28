@@ -238,6 +238,13 @@ getInstancesInfos()
 		fs.writeFileSync('./dist/_hub/instances5.json', JSON.stringify(alives.slice(0, 5)), () => { })
 		//#endregion
 
+		//#region cloudflare pages
+		const noindex = `/*
+  X-Robots-Tag: noindex
+`;
+		fs.writeFileSync('./dist/_headers', noindex, () => { });
+		//#endregion
+
 		//#region remove dead/ignored servers' assets
 		try {
 			const targets = new Set();
