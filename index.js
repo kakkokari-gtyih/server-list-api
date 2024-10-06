@@ -10,6 +10,7 @@ import { mkdirp } from 'mkdirp'
 import Queue from 'promise-queue'
 import AbortController from 'abort-controller'
 import fetch from 'node-fetch';
+import ISO6391 from 'iso-639-1';
 
 import { getInstancesInfos } from './getInstancesInfos.js'
 import instanceq from './instanceq.js'
@@ -235,6 +236,12 @@ getInstancesInfos()
 		//#region create misskey-hub internal use json
 		// if folder not exists, create it
 		await mkdirp('./dist/_hub');
+
+		// language name list
+		const langsJson = Object.fromEntries(langs.map(langCode => [langCode, ISO6391.getNativeName(langCode) || ISO6391.getName(langCode)]));
+		fs.writeFileSync('./dist/_hub/langs.json', JSON.stringify(langsJson), () => { })
+
+		// instances (top 5) list
 		fs.writeFileSync('./dist/_hub/instances5.json', JSON.stringify(alives.slice(0, 5)), () => { })
 		//#endregion
 
