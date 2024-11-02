@@ -51,7 +51,7 @@ async function fetchJson(method, _url, json) {
 		body: (method !== 'GET') ? JSON.stringify(json ?? {}) : undefined,
 		headers: {
 			"Content-Type": "application/json",
-			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0"
 		},
 		redirect: "error"
 	};
