@@ -25,6 +25,8 @@
 - url: miruku.cafe
   langs: ['ja', 'en', 'fr', 'de']
 #ja
+- url: techniclip.com
+  langs: ['ja']
 - url: mi.korange.work
   langs: ['ja']
 - url: misskey.nokotaro.com
@@ -1323,6 +1325,12 @@
   langs: ['ja']
 - url: mk.puzzlesskey.com
   langs: ['ja']
+- url: sp8key.monster
+  langs: ['ja']
+- url: salmonjerky.net
+  langs: ['ja']
+- url: misskey.tako2bo.com
+  langs: ['ja']
 #en
 - url: gensoukyou.jp.net
   langs: ['en']
@@ -2045,7 +2053,6 @@
 - url: misskey.sigma-project.jp
 - url: mk.nitadori.net
 - url: magiasskey.magialabs.blog
-- url: sp8key.monster
 - url: moriyashrine.net
 - url: misskey.mswitchy.ink
 - url: misskey.moe.ceo
@@ -2628,9 +2635,7 @@
 - url: msk.kitamiss.com
 - url: semisskey.com
 - url: miuchusen.xsns.jp
-- url: salmonjerky.net
 - url: mi.sandyman.dev
-- url: misskey.tako2bo.com
 - url: misskey-this.xsns.jp
 - url: kamonan.xsns.jp
 - url: moe.heredos.net
@@ -2698,3 +2703,39 @@
 - url: m.chomechome.jp
 - url: firefish.imirhil.fr
 - url: akiba.social
+- url: misskey.kuzyokaren.com
+- url: kmmi-skey.com
+- url: roost.fd-sns.com
+- url: m.ho4.me
+- url: mnmn.xsns.jp
+- url: misskey.nazetws.com
+- url: torozuki.jp
+- url: mi.amase.cc
+- url: mi.kekyo.net
+- url: room202.fd-sns.com
+- url: meow.nyanpuppu.cat
+- url: inmusky.net
+- url: umbrellaworld.blue
+- url: zlxa.xyz
+- url: mi.zlxa.xyz
+- url: 0107.donotsolve.me
+- url: irlqt.me
+- url: chur.hello-kiwi.com
+- url: ap.miry.cat
+- url: test.misite.ddns.net
+- url: misite.ddns.net
+- url: melismium.fd-sns.com
+- url: schnee.fd-sns.com
+- url: fluffyfluffyworld2022.xsns.jp
+- url: gensp.fd-sns.com
+- url: etomusu-sns.xsns.jp
+- url: social.wiredbodies.net
+- url: misskey.kamedayo.com
+- url: misskey.eri-sunaga.com
+- url: ty4.makibisky.win
+- url: lab.liteyuki.icu
+- url: mi.porubu.com
+- url: hiyotama.net
+- url: abtorytka.fd-sns.com
+- url: mi.ha5hi8.space
+- url: dudes.keinpfusch.net

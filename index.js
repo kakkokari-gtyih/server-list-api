@@ -39,7 +39,7 @@ async function downloadTemp(name, url, tempDir, alwaysReturn) {
 			encoding: null,
 			signal: controller.signal,
 			headers: {
-				"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:99.0) Gecko/20100101 Firefox/99.0"
+				"User-Agent": "JoinMisskey/0.1.0; +https://join.misskey.page/instances"
 			}
 		}).then(res => {
 			clearTimeout(timeout)
@@ -309,33 +309,38 @@ https://misskey-hub.net/servers\n#bot #joinmisskeyupdate`,
 				}](https://${instance.url})`
 		).join('\n')
 
-		// 1. Japanese
-		const japaneseInstances = [];
-
-		for (const instance of sorted) {
-			if (instance.langs.includes("ja")) {
-				japaneseInstances.push(instance)
+		for (const [lang, listTitle] of [
+			["ja", "日本語サーバー (トップ30)"],
+			["ko", "한국어 서버 (상위 30개)"],
+		]) {
+			const specifiedInstances = [];
+	
+			for (const instance of sorted) {
+				if (instance.langs.includes(lang)) {
+					specifiedInstances.push(instance)
+				}
+				if (specifiedInstances.length === 30) break;
 			}
-			if (japaneseInstances.length === 30) break;
+	
+			tree = await fetch("https://p1.a9z.dev/api/notes/create", {
+				method: "POST",
+				body: JSON.stringify({
+					i: process.env.MK_TOKEN,
+					text: `${listTitle}\n\n${getInstancesList(specifiedInstances)}`,
+					replyId: tree.createdNote.id,
+				}),
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}).then(res => res.json());
 		}
 
-		tree = await fetch("https://p1.a9z.dev/api/notes/create", {
-			method: "POST",
-			body: JSON.stringify({
-				i: process.env.MK_TOKEN,
-				text: `日本語サーバー (トップ30)\n\n${getInstancesList(japaneseInstances)}`,
-				replyId: tree.createdNote.id,
-			}),
-			headers: {
-				"Content-Type": "application/json"
-			}
-		}).then(res => res.json());
-
-		// 2. English
+		// other than jp, ko
 		const otherInstances = [];
 
 		for (const instance of sorted) {
 			if (instance.langs.includes("ja")) continue;
+			if (instance.langs.includes("ko")) continue;
 			otherInstances.push(instance);
 			if (otherInstances.length === 30) break;
 		}
@@ -344,7 +349,7 @@ https://misskey-hub.net/servers\n#bot #joinmisskeyupdate`,
 			method: "POST",
 			body: JSON.stringify({
 				i: process.env.MK_TOKEN,
-				text: `Top 30 instances (other than Japanese)\n\n${getInstancesList(otherInstances)}`,
+				text: `Top 30 instances (other than Japanese or Korean)\n\n${getInstancesList(otherInstances)}`,
 				replyId: tree.createdNote.id,
 			}),
 			headers: {
